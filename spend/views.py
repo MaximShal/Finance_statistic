@@ -1,5 +1,5 @@
 from collections import defaultdict
-from django.db.models import Sum
+from django.db.models import Sum, Avg
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -15,10 +15,10 @@ class SpendStatisticViewSet(ModelViewSet):
         result = defaultdict(list)
         grouped_queryset = SpendStatistic.objects.values('date', 'name').annotate(
             total_revenue=Sum('revenue__revenue'),
-            total_spend=Sum('spend'),
-            total_impressions=Sum('impressions'),
-            total_clicks=Sum('clicks'),
-            total_conversion=Sum('conversion')
+            total_spend=Sum('spend', distinct=True),
+            total_impressions=Avg('impressions', distinct=True),
+            total_clicks=Sum('clicks', distinct=True),
+            total_conversion=Avg('conversion', distinct=True)
         )
         for item in grouped_queryset:
             result[str(item['date'])].append({
