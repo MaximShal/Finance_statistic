@@ -6,6 +6,6 @@ router = routers.DefaultRouter()
 router.register("", SpendStatisticViewSet, basename="spend")
 
 urlpatterns = [
-    path("analyze/", SpendStatisticViewSet.as_view({"get": "analyze"}), name="revenue-analyze"),
+    path("analyze/", SpendStatisticViewSet.as_view({"get": "analyze"}), name="spend-analyze"),
     path("", include(router.urls)),
 ]
