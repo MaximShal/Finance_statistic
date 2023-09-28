@@ -6,7 +6,7 @@ from .models import SpendStatistic
 from revenue.models import RevenueStatistic
 
 
-class ProductViewSetTest(TestCase):
+class SpendStatisticViewSetTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.spends = []
