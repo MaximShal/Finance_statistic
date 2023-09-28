@@ -6,3 +6,4 @@ env/
 
 # JetBrains IDE
 .idea/
+/db.sqlite3

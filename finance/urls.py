@@ -15,8 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from .swagger_doc import SchemaView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/v1/", include("finance.api_urls"), name="api-v1"),
+    path("swagger<str:format>/", SchemaView.without_ui(cache_timeout=0), name="schema-json"),
+    path("swagger/", SchemaView.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
 ]
